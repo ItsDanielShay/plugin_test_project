@@ -43,9 +43,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Call our new LoopsOfMultipleFunctions cycle here:
         LoopsOfMultipleFunctions loops = new LoopsOfMultipleFunctions();
-        loops.functionOne(0);  // Start the cycle with count = 0
+        loops.functionOne(0);
     }
 
     private void showRandomInteger() {
@@ -67,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (Exception e) {
             // Handle exceptions
-        } finally {
-            // Optional: code that always runs
         }
     }
 
