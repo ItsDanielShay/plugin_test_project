@@ -1,13 +1,11 @@
 package com.example.plugintestproject;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,23 +33,27 @@ public class MainActivity extends AppCompatActivity {
                 count++;
                 togglePlayback();
 
-                boolean isEven = count%2==0;
-                if(isEven){
+                boolean isEven = count % 2 == 0;
+                if (isEven) {
                     showRandomInteger();
-                }
-                else {
-                    randomIntegerTextView.setText("Random number generation occurs when the button is \ntapped an even number of times.");
+                } else {
+                    randomIntegerTextView.setText("Random number generation occurs " +
+                            "when the button is tapped an even number of times.");
                 }
             }
         });
+
+        // Call our new LoopsOfMultipleFunctions cycle here:
+        LoopsOfMultipleFunctions loops = new LoopsOfMultipleFunctions();
+        loops.functionOne(0);  // Start the cycle with count = 0
     }
 
     private void showRandomInteger() {
-        int random = generateRandomNumber(1,100);
+        int random = generateRandomNumber(1, 100);
         for (int i = 1; i < random; i++) {
             for (int j = 1; j < 3; j++) {
-                int executionTimes = i*j;
-                randomIntegerTextView.setText(String.valueOf("Executions times: " + executionTimes));
+                int executionTimes = i * j;
+                randomIntegerTextView.setText("Executions times: " + executionTimes);
             }
         }
     }
@@ -64,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
                 playSong();
             }
         } catch (Exception e) {
-            // Handle exceptions during playback toggling
+            // Handle exceptions
         } finally {
-            // Code that will be executed whether an exception is caught or not
+            // Optional: code that always runs
         }
     }
 
@@ -81,20 +83,19 @@ public class MainActivity extends AppCompatActivity {
     private void stopSong() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
-            mediaPlayer.seekTo(0); // Rewind to the beginning
+            mediaPlayer.seekTo(0);
             isPlaying = false;
             playButton.setText("Play");
         }
     }
+
     private static int generateRandomNumber(int min, int max) {
         if (min >= max) {
             throw new IllegalArgumentException("Max must be greater than min");
         }
-
         Random rand = new Random();
         return rand.nextInt(max - min + 1) + min;
     }
-
 
     @Override
     protected void onDestroy() {
